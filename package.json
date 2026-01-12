@@ -14,17 +14,20 @@
   ],
   "author": "David Matthew <davidmatthew.ie@gmail.com> (https://davidmatthew.ie)",
   "license": "ISC",
-  "source": "src/index.js",
+  "source": "src/index.ts",
   "module": "dist/svjs.min.js",
+  "types": "dist/index.d.ts",
   "targets": {
     "module": {
       "optimize": true
     }
   },
   "scripts": {
-    "clean": "rm -r dist",
-    "start": "parcel watch",
-    "build": "parcel build"
+    "clean": "rm -rf dist",
+    "typecheck": "tsc --noEmit",
+    "build:types": "tsc",
+    "build": "npm run clean && parcel build && npm run build:types",
+    "start": "parcel watch"
   },
   "repository": {
     "type": "git",
@@ -35,6 +38,9 @@
   },
   "homepage": "https://github.com/davidmatthew-ie/svjs#readme",
   "devDependencies": {
-    "parcel": "^2.8.2"
+    "@parcel/packager-ts": "^2.8.2",
+    "@parcel/transformer-typescript-types": "^2.8.2",
+    "parcel": "^2.8.2",
+    "typescript": "^5.9.3"
   }
 }
